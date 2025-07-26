@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Organizer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for Google icon -->
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css)">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>EventSpark</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li id="createEventNavLink" style="display: none;"><a href="#create-event">Create Event</a></li>
+                    <li id="myEventsNavLink" style="display: none;"><a href="#my-events">My Events</a></li>
+                    <li id="contactNavLink"><a href="#contact">Contact</a></li>
+                    <li id="authLinks">
+                        <a href="#" id="loginLink">Login</a> / <a href="#" id="registerLink">Register</a>
+                    </li>
+                    <li id="loggedInUserDisplay" style="display: none;">
+                        Welcome, <span id="userEmailDisplay"></span>!
+                        <button class="btn btn-sm" id="logoutBtn">Logout</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Plan, Promote & Manage Your Events Effortlessly</h2>
+                <p>From small gatherings to large conferences, EventSpark has you covered.</p>
+                <button class="btn" id="getStartedBtn">Get Started Now</button>
+            </div>
+        </section>
+
+        <!-- Login/Register Section -->
+        <section id="auth-section" class="section-padding" style="display: none;">
+            <div class="container auth-form-container">
+                <h2 id="auth-title">Login</h2>
+                <form id="auth-form">
+                    <div class="form-group">
+                        <label for="authEmail">Email:</label>
+                        <input type="email" id="authEmail" name="email" required>
+                    </div>
+                    <div class="form-group" id="passwordGroup">
+                        <label for="authPassword">Password:</label>
+                        <input type="password" id="authPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn" id="authSubmitBtn">Login</button>
+                    <p class="auth-toggle-text">
+                        Don't have an account? <a href="#" id="toggleToRegister">Register here</a>
+                    </p>
+                    <p class="auth-toggle-text">
+                        Already have an account? <a href="#" id="toggleToLogin">Login here</a>
+                    </p>
+                    <div class="google-login-separator">
+                        <span>OR</span>
+                    </div>
+                    <button type="button" class="btn google-btn" id="googleLoginBtn">
+                        <i class="fab fa-google"></i> Login with Google
+                    </button>
+                    <div id="authMessage" class="message-box" style="display: none;"></div>
+                </form>
+            </div>
+        </section>
+
+        <section id="create-event" class="section-padding" style="display: none;">
+            <div class="container">
+                <h2>Create Your Event</h2>
+                <form id="event-form">
+                    <div class="form-group">
+                        <label for="eventName">Event Name:</label>
+                        <input type="text" id="eventName" name="eventName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">Date:</label>
+                        <input type="date" id="eventDate" name="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTime">Time:</label>
+                        <input type="time" id="eventTime" name="eventTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLocation">Location:</label>
+                        <input type="text" id="eventLocation" name="eventLocation" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Description:</label>
+                        <textarea id="eventDescription" name="eventDescription" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventCategory">Category:</label>
+                        <select id="eventCategory" name="eventCategory">
+                            <option value="conference">Conference</option>
+                            <option value="workshop">Workshop</option>
+                            <option value="party">Party</option>
+                            <option value="webinar">Webinar</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Create Event</button>
+                    <div id="eventFormMessage" class="message-box" style="display: none;"></div>
+                </form>
+            </div>
+        </section>
+
+        <section id="contact" class="section-padding" style="display: none;">
+    <div class="container auth-form-container"> <h2>Contact Us</h2>
+        <p>Have questions or feedback? Reach out to us!</p>
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="contactName">Your Name:</label>
+                <input type="text" id="contactName" name="contactName" required>
+            </div>
+            <div class="form-group">
+                <label for="contactEmail">Your Email:</label>
+                <input type="email" id="contactEmail" name="contactEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="contactMessage">Message:</label>
+                <textarea id="contactMessage" name="contactMessage" rows="8" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+        <div id="contactMessageStatus" class="message-box" style="display: none;"></div>
+        <p style="text-align: center; margin-top: 30px;">
+            Alternatively, you can email us directly at: <a href="mailto:support@eventspark.com">support@eventspark.com</a>
+        </p>
+    </div>
+</section>
+
+        <section id="my-events" class="section-padding bg-light" style="display: none;">
+            <div class="container">
+                <h2>My Events</h2>
+                <div id="event-list">
+                    <p>Loading events...</p>
+                    <!-- Events will be dynamically added here by JavaScript -->
+                </div>
+                <div id="eventListMessage" class="message-box" style="display: none;"></div>
+            </div>
+        </section>
+
+        <section id="features" class="section-padding">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3>Easy Planning</h3>
+                        <p>Streamlined tools to define every aspect of your event.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Powerful Promotion</h3>
+                        <p>Share your events easily across social media and email.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Seamless Management</h3>
+                        <p>Track registrations, attendees, and feedback in one place.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EventSpark. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

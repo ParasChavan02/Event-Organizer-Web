@@ -1,0 +1,689 @@
+/* public/css/style.css */
+/* General Styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap'); /* Adding Montserrat for headings */
+
+:root {
+    --primary-color: #6A057F; /* Deep Violet */
+    --secondary-color: #3C096C; /* Darker Violet */
+    --accent-color: #FFD700; /* Bright Gold */
+    --text-color: #2C3E50; /* Dark Blue-Grey for main text */
+    --light-text-color: #FFFFFF;
+    --bg-light: #F0F4F7; /* Very light grey-blue background */
+    --border-color: #CFD8DC; /* Light blue-grey border */
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.25);
+    --shadow-deep: rgba(0, 0, 0, 0.4);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+}
+
+/* Universal box-sizing for easier layout */
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px; /* Increased padding for better spacing */
+}
+
+.section-padding {
+    padding: 100px 0; /* More vertical padding for sections */
+}
+
+/* Keyframes for animations */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseBorder {
+    0% { box-shadow: 0 0 0 0 rgba(106, 5, 127, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(106, 5, 127, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(106, 5, 127, 0); }
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 22px 0; /* Increased padding */
+    box-shadow: 0 6px 15px var(--shadow-medium); /* More prominent shadow */
+    border-bottom-left-radius: 15px; /* More rounded corners */
+    border-bottom-right-radius: 15px;
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 1000; /* Ensure it stays on top */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif; /* Montserrat for the logo/title */
+    margin: 0;
+    font-size: 2.8em; /* Larger heading */
+    font-weight: 900; /* Extra bold */
+    letter-spacing: -1px;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3); /* Deeper text shadow for impact */
+    transition: transform 0.3s ease;
+}
+
+header h1:hover {
+    transform: scale(1.05); /* Slight scale on hover for logo */
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Align items vertically */
+    flex-wrap: wrap;
+}
+
+header nav ul li {
+    margin-left: 40px; /* More space between nav items */
+}
+
+header nav ul li a {
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2em; /* Slightly larger font */
+    padding: 10px 0; /* Add padding for better click area */
+    transition: color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    overflow: hidden; /* For underline animation */
+}
+
+header nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px; /* Thicker underline */
+    bottom: -8px; /* Position further below text */
+    left: -100%; /* Start off-screen */
+    background-color: var(--accent-color);
+    transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother transition */
+}
+
+header nav ul li a:hover::after {
+    left: 0; /* Slide in from left on hover */
+}
+
+header nav ul li a:hover {
+    color: var(--accent-color); /* Highlight on hover */
+    transform: translateY(-4px); /* More pronounced lift effect */
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); /* Glowing text effect */
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #E8DFF5 0%, #D4C1EC 100%); /* Softer purple gradient */
+    background-size: 200% 200%; /* For animation */
+    animation: gradientShift 12s ease infinite; /* Subtle background animation */
+    color: var(--text-color);
+    text-align: center; /* Ensures h2, p, and btn are centered */
+    padding: 150px 0; /* More vertical padding */
+    border-radius: 20px; /* More rounded corners */
+    margin: 40px 30px; /* Margin from edges */
+    box-shadow: 0 15px 40px var(--shadow-deep); /* Deeper, softer shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px; /* Minimum height for hero */
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h2 {
+    font-family: 'Montserrat', sans-serif; /* Montserrat for headings */
+    font-size: 4.5em; /* Larger, more impactful heading */
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    font-weight: 900;
+    line-height: 1.1;
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+    opacity: 0; /* For fade-in animation */
+    animation: fadeInScale 1.2s ease-out forwards 0.5s; /* Delayed fade-in with scale */
+}
+
+.hero p {
+    font-size: 1.6em; /* Larger paragraph text */
+    margin-bottom: 50px;
+    max-width: 800px;
+    color: #555;
+    opacity: 0; /* For fade-in animation */
+    animation: fadeInScale 1.2s ease-out forwards 0.8s; /* Delayed fade-in with scale */
+    margin-left: auto; /* Ensure paragraph block is centered */
+    margin-right: auto; /* Ensure paragraph block is centered */
+}
+
+/* Keyframe for fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 18px 45px; /* Increased padding */
+    border: none;
+    border-radius: 12px; /* More rounded corners */
+    cursor: pointer;
+    font-size: 1.3em; /* Larger font */
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    box-shadow: 0 8px 20px var(--shadow-light); /* Button shadow */
+    display: inline-flex; /* For icon alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    animation: slideInUp 1s ease-out forwards 1.2s; /* Slide in from bottom */
+    opacity: 0; /* Start hidden for animation */
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Stronger light overlay for hover effect */
+    transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 0;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color); /* Darker violet on hover */
+    transform: translateY(-7px); /* More pronounced lift effect */
+    box-shadow: 0 15px 35px var(--shadow-medium); /* Deeper shadow on hover */
+    filter: brightness(1.1); /* Slight brightness increase */
+}
+
+.btn:active {
+    transform: translateY(-2px) scale(0.98); /* Press effect */
+    box-shadow: 0 5px 10px var(--shadow-light);
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+.btn-sm {
+    padding: 12px 25px;
+    font-size: 1.05em;
+    border-radius: 10px;
+}
+
+.google-btn {
+    background-color: #DB4437; /* Google Red */
+    margin-top: 30px;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: slideInUp 1s ease-out forwards 1.4s; /* Delayed slide in */
+    opacity: 0; /* Start hidden for animation */
+    /* Added for centering */
+    display: block; /* Make it a block element */
+    margin-left: auto; /* Auto margin on left */
+    margin-right: auto; /* Auto margin on right */
+    max-width: 280px; /* Optional: Limit width for better centering on larger forms */
+}
+
+.google-btn:hover {
+    background-color: #C23321;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    filter: brightness(1.08);
+}
+
+.google-btn i {
+    font-size: 1.4em;
+}
+
+/* Form Styling */
+.auth-form-container,
+#event-form,
+#contact-form {
+    background-color: var(--light-text-color);
+    padding: 50px; /* More padding */
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 10px 30px var(--shadow-light); /* Enhanced shadow */
+    max-width: 650px; /* Wider forms */
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.auth-form-container:hover,
+#event-form:hover,
+#contact-form:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 45px var(--shadow-medium);
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif; /* Montserrat for headings */
+    font-size: 3.2em;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 800;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 30px; /* More space between form groups */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 12px; /* More space below label */
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.15em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 16px; /* More padding in inputs */
+    border: 2px solid var(--border-color); /* Thicker border */
+    border-radius: 12px; /* More rounded corners */
+    font-size: 1.1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+    background-color: #FBFBFB; /* Lighter input background */
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--accent-color); /* Accent color border on focus */
+    box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.3); /* More visible glow focus ring */
+    outline: none;
+    background-color: var(--light-text-color);
+    border-radius: 8px; /* Slight change on focus */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 160px;
+}
+
+.auth-toggle-text {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.05em;
+    color: #666;
+}
+
+.auth-toggle-text a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: text-decoration 0.3s ease, color 0.3s ease;
+}
+
+.auth-toggle-text a:hover {
+    text-decoration: underline;
+    color: var(--secondary-color); /* Darker violet on hover */
+}
+
+.google-login-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 45px 0; /* More spacing */
+    color: #999;
+    font-size: 1.05em;
+    font-weight: 500;
+}
+
+.google-login-separator::before,
+.google-login-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 2px solid var(--border-color); /* Thicker separator line */
+}
+
+.google-login-separator:not(:empty)::before {
+    margin-right: 1.2em; /* More space around OR */
+}
+
+.google-login-separator:not(:empty)::after {
+    margin-left: 1.2em;
+}
+
+/* Message Box for alerts */
+.message-box {
+    padding: 22px; /* More padding */
+    border-radius: 12px; /* More rounded */
+    margin-top: 35px; /* More margin */
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.message-box.success {
+    background-color: #D4EDDA;
+    color: var(--success-color);
+    border: 1px solid #C3E6CB;
+    opacity: 1;
+}
+
+.message-box.error {
+    background-color: #F8D7DA;
+    color: var(--error-color);
+    border: 1px solid #F5C6CB;
+    opacity: 1;
+}
+
+/* My Events Section */
+#my-events {
+    background-color: var(--bg-light); /* Ensure background is light */
+}
+
+#event-list {
+    margin-top: 50px; /* More top margin */
+    display: grid;
+    gap: 35px; /* More space between cards */
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); /* Larger min-width */
+}
+
+.event-card {
+    background-color: var(--light-text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 18px; /* More rounded corners */
+    padding: 35px; /* More padding */
+    box-shadow: 0 8px 25px var(--shadow-light); /* Nicer shadow */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push actions to bottom */
+}
+
+.event-card:hover {
+    transform: translateY(-12px) rotateX(2deg); /* More pronounced lift with slight 3D tilt */
+    box-shadow: 0 18px 45px var(--shadow-medium); /* Deeper shadow on hover */
+}
+
+.event-card h3 {
+    font-family: 'Montserrat', sans-serif; /* Montserrat for headings */
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 2em;
+    font-weight: 800;
+}
+
+.event-card p {
+    margin-bottom: 12px;
+    font-size: 1.05em;
+    color: #555;
+}
+
+.event-card .card-actions {
+    margin-top: 30px; /* More space above buttons */
+    display: flex;
+    gap: 18px; /* More space between buttons */
+}
+
+.event-card .btn-sm {
+    flex-grow: 1;
+    font-weight: 600;
+    background-color: var(--secondary-color); /* Secondary color for action buttons */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.event-card .btn-sm:hover {
+    background-color: #2F075D; /* Darker secondary on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Features Grid */
+#features {
+    background-color: var(--light-text-color); /* Ensure background is white */
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Slightly larger min-width */
+    gap: 50px; /* More space between features */
+    margin-top: 60px;
+    text-align: center;
+}
+
+.feature-item {
+    background-color: var(--bg-light); /* Light background for items */
+    padding: 45px; /* More padding */
+    border-radius: 18px; /* More rounded corners */
+    box-shadow: 0 8px 25px var(--shadow-light);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid var(--border-color);
+}
+
+.feature-item:hover {
+    transform: translateY(-12px) rotateZ(1deg); /* More pronounced lift with slight rotation */
+    box-shadow: 0 18px 45px var(--shadow-medium);
+}
+
+.feature-item h3 {
+    font-family: 'Montserrat', sans-serif; /* Montserrat for headings */
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-size: 2.2em;
+    font-weight: 800;
+}
+
+.feature-item p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 40px 0; /* More padding */
+    margin-top: 80px; /* More margin from content */
+    border-top-left-radius: 15px; /* More rounded corners */
+    border-top-right-radius: 15px;
+    box-shadow: 0 -6px 15px var(--shadow-medium); /* Shadow on top */
+}
+
+footer p {
+    margin: 0;
+    font-size: 1em;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero h2 {
+        font-size: 3.5em;
+    }
+    .hero p {
+        font-size: 1.4em;
+    }
+    .section-padding {
+        padding: 80px 0;
+    }
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        margin-bottom: 20px;
+        font-size: 2.5em;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
+
+    header nav ul li a {
+        font-size: 1.1em;
+    }
+
+    .hero {
+        padding: 100px 20px;
+        margin: 30px 15px;
+        min-height: 400px;
+    }
+
+    .hero h2 {
+        font-size: 3em;
+    }
+
+    .hero p {
+        font-size: 1.2em;
+    }
+
+    .btn {
+        padding: 14px 30px;
+        font-size: 1.2em;
+    }
+
+    .auth-form-container,
+    #event-form,
+    #contact-form {
+        padding: 35px;
+        margin: 0 15px;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        margin-bottom: 35px;
+    }
+
+    .form-group label {
+        font-size: 1.05em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 14px;
+    }
+
+    .event-card,
+    .feature-item {
+        padding: 30px;
+    }
+
+    .event-card h3 {
+        font-size: 1.6em;
+    }
+
+    .feature-item h3 {
+        font-size: 2em;
+    }
+
+    .event-card .card-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .hero {
+        padding: 80px 15px;
+        margin: 25px 10px;
+    }
+
+    .hero h2 {
+        font-size: 2.5em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+
+    .auth-form-container,
+    #event-form,
+    #contact-form {
+        padding: 25px;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .google-login-separator {
+        margin: 30px 0;
+    }
+}
