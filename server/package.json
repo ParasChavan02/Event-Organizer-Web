@@ -1,7 +1,7 @@
     {
-      "name": "event-organizer-backend",
+      "name": "event-organizer-backend-minimal",
       "version": "1.0.0",
-      "description": "Backend for Event Organizer Website",
+      "description": "Minimal Backend for debugging",
       "main": "minimal-server.js",
       "scripts": {
         "start": "node minimal-server.js",
@@ -11,18 +11,8 @@
       "author": "",
       "license": "ISC",
       "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "connect-mongo": "^5.1.0",
-        "cors": "^2.8.5",
-        "dotenv": "^16.4.5",
         "express": "^4.19.2",
-        "express-session": "^1.18.0",
-        "jsonwebtoken": "^9.0.2",
-        "mongoose": "^8.4.1",
-        "passport": "^0.7.0",
-        "passport-google-oauth20": "^2.0.0",
-        "passport-jwt": "^4.0.1",
-        "passport-local": "^1.0.0"
+        "cors": "^2.8.5"
       },
       "devDependencies": {
         "nodemon": "^3.1.3"
