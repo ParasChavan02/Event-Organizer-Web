@@ -7,6 +7,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const User = require('../models/User');
+const dotenv = require('dotenv'); // NEW: Import dotenv
+
+dotenv.config(); // NEW: Load environment variables
+
+// Define the frontend base URL dynamically
+// Use process.env.RENDER_EXTERNAL_URL (Render's primary URL) if available,
+// otherwise fall back to a specific frontend URL (e.g., your Render frontend URL),
+// and then to localhost for local development.
+const FRONTEND_BASE_URL = process.env.RENDER_EXTERNAL_URL
+    ? process.env.RENDER_EXTERNAL_URL // Render automatically sets this for your service's URL
+    : process.env.FRONTEND_URL || 'http://localhost:8000'; // Fallback to custom env var or local
 
 // Helper function to generate JWT token
 const generateToken = (id) => {
@@ -104,7 +115,7 @@ router.get('/google',
 // @access  Public
 router.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: 'http://localhost:8000/index.html?authStatus=failed', // Redirect on failure
+        failureRedirect: `${FRONTEND_BASE_URL}/index.html?authStatus=failed`, // UPDATED: Dynamic redirect
         session: false // We are using JWTs, so no need for session after auth
     }),
     (req, res) => {
@@ -112,7 +123,7 @@ router.get('/google/callback',
         const token = generateToken(req.user.id);
         // Redirect to frontend with token in URL (or set as cookie)
         // For simplicity, we'll pass it in the URL hash, frontend JS will pick it up
-        res.redirect(`http://localhost:8000/index.html#token=${token}&email=${req.user.email}`);
+        res.redirect(`${FRONTEND_BASE_URL}/index.html#token=${token}&email=${req.user.email}`); // UPDATED: Dynamic redirect
     }
 );
 
